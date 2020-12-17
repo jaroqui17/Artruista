@@ -113,11 +113,9 @@ export default function Login() {
                 <NavLink to="/signup" variant="body2">
                   {"Don't have an account? Sign Up"}
                 </NavLink>
-                {/* <Link href="#" variant="body2">
-                </Link> */}
               </Grid>
             </Grid>
-            <Box mt={30}>
+            <Box mt={25}>
               <Copyright />
             </Box>
           </form>
