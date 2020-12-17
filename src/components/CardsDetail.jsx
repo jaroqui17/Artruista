@@ -1,4 +1,5 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
@@ -31,10 +32,12 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const cards = [1, 2, 3, 4];
+// const cards = [1, 2, 3, 4];
 
 export default function CardsDetail() {
   const classes = useStyles();
+  const cards = useSelector(state => state.cards);
+
 
   return (
     <React.Fragment>
@@ -45,7 +48,7 @@ export default function CardsDetail() {
           <Grid container spacing={4}>
             {cards.map((card) => (
               <Grid item key={card} xs={12} sm={6}>
-                <Card className={classes.card}>
+                <Card className={classes.card} key={card.key}>
                   <CardMedia
                     className={classes.cardMedia}
                     image="https://source.unsplash.com/random"
@@ -53,13 +56,13 @@ export default function CardsDetail() {
                   />
                   <CardContent className={classes.cardContent}>
                     <Typography gutterBottom variant="h5" component="h2">
-                      Jon 
+                      {card.firstName} 
                     </Typography>
                     <Typography>
-                      This is my story.........
+                      {card.personStory}
                     </Typography>
                     <Typography>
-                      How I got affected by blahhhhhh
+                      {card.affected}
                     </Typography>
                   </CardContent>
                   <CardActions>
