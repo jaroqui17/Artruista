@@ -29,26 +29,28 @@ const useStyles = makeStyles((theme) => ({
   },
   cardContent: {
     flexGrow: 0,
+  },
+  button: {
+    alignItems: 'center',
+    justifyContent: 'center'
   }
 }));
 
-// const cards = [1, 2, 3, 4];
 
 export default function CardsDetail() {
   const classes = useStyles();
-  const cards = useSelector(state => state.cards);
-
+  // retrieving userCards from global state to be rendered
+  const cards = useSelector(state => state.userCard);
 
   return (
     <React.Fragment>
       <CssBaseline />
       <main>
         <Container className={classes.cardGrid} maxWidth="md">
-          {/* End hero unit */}
           <Grid container spacing={4}>
-            {cards.map((card) => (
-              <Grid item key={card} xs={12} sm={6}>
-                <Card className={classes.card} key={card.key}>
+            {cards.map((card, i) => (
+              <Grid item key={i} xs={12} sm={6}>
+                <Card className={classes.card}>
                   <CardMedia
                     className={classes.cardMedia}
                     image="https://source.unsplash.com/random"
@@ -59,18 +61,15 @@ export default function CardsDetail() {
                       {card.firstName} 
                     </Typography>
                     <Typography>
-                      {card.personStory}
+                      {card.story}
                     </Typography>
                     <Typography>
-                      {card.affected}
+                      {card.help}
                     </Typography>
                   </CardContent>
-                  <CardActions>
+                  <CardActions className={classes.button}>
                     <Button size="small" color="primary">
                       View
-                    </Button>
-                    <Button size="small" color="primary">
-                      Edit
                     </Button>
                   </CardActions>
                 </Card>

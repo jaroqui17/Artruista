@@ -1,44 +1,50 @@
 import * as types from './actionsTypes/actionsTypes';
 
 const initialState = {
-	cards: [
+	userCard: [
 		{
 			firstName: 'Jon',
 			lastName: 'A',
-			personStory: 'I ate taco bell',
-			affected: 'My tummy hurted',
-			key: 1
+			story: 'I ate taco bell',
+			help: 'My tummy hurted',
+			lat: 33.684566,
+			lng: -117.826508,
 		},
 		{
 			firstName: 'Mai',
 			lastName: 'N',
-			personStory: 'became fellow',
-			affected: 'don\'t sleep',
-			key: 2
+			story: 'wowow allala',
+			help: "don't sleep",
+			lat: 34.052235,
+			lng: -118.243683,
 		},
 		{
 			firstName: 'Seamus',
-			lastName: 'R',
-			personStory: 'bought gifts',
-			affected: 'too expensive',
-			key: 3
+			lastName: 'r',
+			story: 'something',
+			help: 'blah',
+			lat: 33.77005,
+			lng: -118.193741,
 		},
 		{
 			firstName: 'Jarryl',
-			lastName: 'O',
-			personStory: 'wine tasting',
-			affected: 'had too much fun',
-			key: 4
-		}
-	]
+			lastName: 'o',
+			story: 'wowoow',
+			help: 'meooow',
+			lat: 33.835293,
+			lng: -117.914505,
+		},
+	],
 };
 
 const reducer = (state = initialState, action) => {
 	switch (action.type) {
-		case types.INCREASE:
+		case types.ADDING_STORY:
+			// creating userCard variable that will add new story input
+			const userCard = [...state.userCard, action.payload];
 			return {
 				...state,
-				counter: state.counter + 1,
+				userCard: userCard,
 			};
 
 		default:
