@@ -8,7 +8,10 @@ import CardsDetail from '../components/CardsDetail.jsx';
 
 import Header from '../components/Header.jsx'
 import Map from '../components/Map.jsx';
+import MapCard from '../components/MapCard.jsx';
 import { NavLink } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import PopCardView from '../components/PopCardView.jsx';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -38,6 +41,8 @@ const useStyles = makeStyles((theme) => ({
 
 const MainContainer = () => {
   const classes = useStyles();
+  const viewCard = useSelector(state => state.viewCard);
+  const viewMapCard = useSelector(state => state.viewMapCard);
 
   return (
     <React.Fragment>
@@ -52,7 +57,7 @@ const MainContainer = () => {
                 <NavLink to="/story" activeClassName="selected" className={classes.nav}>
                   <Button variant="contained">Share your story</Button>
                 </NavLink>
-                <CardsDetail />
+               {viewCard ? (<CardsDetail />) : (viewMapCard ? (<PopCardView />) : (<OneStory />))}
               </div>
             </Grid>
           </Grid>

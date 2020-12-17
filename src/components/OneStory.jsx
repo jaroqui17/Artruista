@@ -1,7 +1,7 @@
 import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { ViewCard } from '../redux/actions/actions.js';
+import { UnviewCard } from '../redux/actions/actions.js';
 import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
@@ -12,7 +12,6 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-
 
 
 const useStyles = makeStyles((theme) => ({
@@ -39,30 +38,28 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-
-
-export default function CardsDetail() {
+const OneStory = () => {
   const classes = useStyles();
   const cards = useSelector(state => state.userCard);
-  const dispatch = useDispatch();
-  const viewCard = () => dispatch(ViewCard());
-  const history = useHistory();
+  const oneCard = cards[0];
+  const dispatch = useDispatch()
+  const unviewCard = () => dispatch(UnviewCard())
 
-  const handleView = (e, id) => {
-    e.stopPropagation()
-    viewCard();
-    return history.push(`/view/${id}`);
-  };
+  const history = useHistory()
 
-  
+const handleClicked = (e) => {
+  e.preventDefault()
+  unviewCard()
+  return history.push('/')
+}
+
   return (
     <React.Fragment>
       <CssBaseline />
       <main>
         <Container className={classes.cardGrid} maxWidth="md">
           <Grid container spacing={4}>
-            {cards.map((card, i) => (
-              <Grid item key={i} xs={12} sm={6}>
+              <Grid item xs={12}>
                 <Card className={classes.card}>
                   <CardMedia
                     className={classes.cardMedia}
@@ -71,26 +68,27 @@ export default function CardsDetail() {
                   />
                   <CardContent className={classes.cardContent}>
                     <Typography gutterBottom variant="h5" component="h2">
-                      {card.firstName} 
+                      {oneCard.firstName} 
                     </Typography>
                     <Typography>
-                      {card.story}
+                      {oneCard.story}
                     </Typography>
                     <Typography>
-                      {card.help}
+                      {oneCard.help}
                     </Typography>
                   </CardContent>
-                  <CardActions className={classes.button}>
-                    <Button size="small" color="primary" onClick={(e) => handleView(e, i)}>
-                      View
+                  <CardActions className={classes.button} onClick={handleClicked}>
+                    <Button size="small" color="primary">
+                      Home
                     </Button>
                   </CardActions>
                 </Card>
               </Grid>
-            ))}
           </Grid>
         </Container>
       </main>
     </React.Fragment>
   );
 }
+
+export default OneStory;
