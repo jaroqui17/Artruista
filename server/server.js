@@ -11,6 +11,7 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('build'));
+const bcrypt = require('bcrypt')
 
 const PORT = process.env.PORT || 5000;
 
@@ -19,12 +20,14 @@ app.use('/user', userRouter)
 
 
 
-
 // serve main app
 app.get('/', (req, res) => {
 	console.log(req);
 	res.sendFile(path.resolve(__dirname, './index.html'));
 });
+
+
+
 
 
 // catch-all route handler for any requests to an unknown route
