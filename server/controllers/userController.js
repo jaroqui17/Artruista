@@ -4,14 +4,10 @@ const userController = {
 	postUser(req, res, next) {
 		// console.log(req.body)
 		const params = [
-			req.body.FirstName,
-			req.body.LastName,
-			req.body.Email,
-			req.body.Username,
-			req.body.Password,
-			req.body.Location,
+			req.body.email,
+			req.body.password,
 		];
-		const queryString = `INSERT INTO Users (FirstName, LastName, Email, Username, Password, Location) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *;`;
+		const queryString = `INSERT INTO Users (Email, Password) VALUES ($1, $2) RETURNING *;`;
 
 		db.query(queryString, params)
 			.then((data) => {

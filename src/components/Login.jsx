@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 import Header from './Header.jsx';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -79,6 +80,10 @@ export default function Login() {
     e.preventDefault();
     // hold user values
     console.log(user);
+    axios.post('http://localhost:8080/user', {
+      email: user.email,
+      password: user.password
+    });
     // where we make our axios call to backend
 
     // resetting user values
