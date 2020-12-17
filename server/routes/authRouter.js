@@ -8,7 +8,8 @@ router.get('/google', passport.authenticate('google', { scope: ['profile'] }));
 // the authenticate exchanges the code with the information
 // once the user is redirected here, call on the strategy once again
 router.get('/google/redirect', passport.authenticate('google'), (req, res) => {
-	res.redirect(`#/`);
+	console.log('in auth router')
+	res.redirect(`/#/main`);
 });
 
 module.exports = router;

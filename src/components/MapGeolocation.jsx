@@ -18,8 +18,8 @@ const MapGeolocation = ({panTo}) => {
       // we have two cb funcs, one if error and one if success, which we replace to check position
       navigator.geolocation.getCurrentPosition(
         (position) => {
+          console.log(position);
           // position gives you lat and long, so want to pass that to panTo
-          console.log(position)
           panTo({
             lat: position.coords.latitude,
             lng: position.coords.longitude,

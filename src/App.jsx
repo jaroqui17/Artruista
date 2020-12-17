@@ -16,9 +16,9 @@ export default function App() {
     <Router>
       <React.Fragment>
           <Switch>   
-           <Route path="/login" exact component={Login} />
+           <Route path="/" exact component={Login} />
            <Route path="/signup" component={SignUp} />
-           <Route exact path="/" component={MainContainer} />
+           <Route exact path="/main" component={MainContainer} />
            <Route path='/story' component={Story} exact/>
            <Route path='/view/:id' component={OneStory} exact/>
           </Switch>

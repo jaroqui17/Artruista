@@ -42,6 +42,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function CardsDetail() {
   const classes = useStyles();
+  // retrieving userCards from global state to be rendered
   const cards = useSelector(state => state.userCard);
   const dispatch = useDispatch();
   const viewCard = () => dispatch(ViewCard());
