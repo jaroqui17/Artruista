@@ -56,9 +56,8 @@ const handleClicked = (e) => {
   return (
     <React.Fragment>
       <CssBaseline />
-      <main>
-        <Container className={classes.cardGrid} maxWidth="md">
-          <Grid container>
+        <Container className={classes.cardGrid}>
+          <Grid>
               <Grid item xs={12}>
                 <Card className={classes.card}>
                   <CardMedia
@@ -77,16 +76,18 @@ const handleClicked = (e) => {
                       {selectedStory.help}
                     </Typography>
                   </CardContent>
-                  <CardActions className={classes.button} onClick={handleClicked}>
-                    <Button size="small" color="primary">
+                  <CardActions className={classes.button} >
+                    <Button size="small" color="primary" onClick={handleClicked}>
                       Home
+                    </Button>
+                    <Button size="small" color="primary">
+                      Connect
                     </Button>
                   </CardActions>
                 </Card>
               </Grid>
           </Grid>
         </Container>
-      </main>
     </React.Fragment>
   );
 }
