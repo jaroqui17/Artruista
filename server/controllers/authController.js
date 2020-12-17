@@ -11,9 +11,9 @@ const authController = {
     	bcrypt.compare(inputpass, pass, (err, result) => {
     		if (result) { 
           console.log('bcrypt worked compared')
-          next() //redirect to login? ?? ??
+          next()
         }
-        else next(err)
+        else next(err) //redirec to signup
     	})    
 
   }
