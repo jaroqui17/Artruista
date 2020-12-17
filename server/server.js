@@ -26,7 +26,7 @@ app.get('/', (req, res) => {
 	// const jwtToCheck = req.cookies.token ? //what if this is undefined
 	jwt.verify(jwtToCheck, secret, (err, decoded) => {
 		if (decoded) res.json({authenticated : true})
-		else 	res.sendFile(path.resolve(__dirname, './index.html'));
+		else res.sendFile(path.resolve(__dirname, './index.html'));
 	})
 	// res.sendFile(path.resolve(__dirname, './index.html'));
 });
