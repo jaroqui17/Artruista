@@ -9,6 +9,11 @@ const authController = {
     console.log('input', inputusername)
     console.log('db', username) 
     console.log('howdy jarry', req.params)
+
+    //bcrypt
+
+    //redirect to mainpage
+    
     // if (err) res.locals.error = err; 
     if (pass === inputpass) {
      console.log('bruh')
