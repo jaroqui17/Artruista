@@ -110,7 +110,7 @@ export default function Story() {
     });
 
     // returning user back to main page
-    return history.push('/')
+    return history.push('/main')
   }
 
   return (

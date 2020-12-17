@@ -50,7 +50,7 @@ const PopCardView = () => {
 const handleClicked = (e) => {
   e.preventDefault()
   unviewCard()
-  return history.push('/')
+  return history.push('/main')
 }
 
 const img=["https://source.unsplash.com/user/erondu", "https://source.unsplash.com/user/john_vicente26", "https://source.unsplash.com/user/timbog80","https://source.unsplash.com/random",

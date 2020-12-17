@@ -50,7 +50,7 @@ const OneStory = () => {
 const handleClicked = (e) => {
   e.preventDefault()
   unviewCard()
-  return history.push('/')
+  return history.push('/main')
 }
 
   return (
