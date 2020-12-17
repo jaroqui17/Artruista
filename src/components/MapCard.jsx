@@ -39,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const MapCard = ({selected}) => {
+const MapCard = ({selected, img}) => {
   const classes = useStyles();
   // dispatch if mapcard clicked or not
   const dispatch = useDispatch();
@@ -54,13 +54,17 @@ const MapCard = ({selected}) => {
     viewMapCard();
   }
 
+
+  const num = Math.floor(Math.random() * 8)
+
   return (
     <React.Fragment>
               <CssBaseline />
                 <Card className={classes.card}>
                   <CardMedia
                     className={classes.cardMedia}
-                    image="https://source.unsplash.com/random"
+                    // image="https://source.unsplash.com/random"
+                    image={img[num]}
                     title="Image title"
                   />
                   <CardContent className={classes.cardContent}>

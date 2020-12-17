@@ -19,7 +19,7 @@ const libraries = ['places'];
 const mapContainerStyle = {
   // width: '100vw',
   width: '100%',
-  height: '125vh',
+  height: '135vh',
 };
 
 // hardcoding where center of map is, need to go back and get this from geolocation
@@ -61,11 +61,15 @@ export default function Map() {
     // pan to that marker
     mapRef.current.panTo({lat, lng});
     // and want map to zoom to hat location
-    mapRef.current.setZoom(12);
+    mapRef.current.setZoom(10);
   }, []);
 
   if (loadError) return 'Error loading maps';
   if (!isLoaded) return 'Loading Maps';
+
+
+  const img=["https://source.unsplash.com/user/erondu", "https://source.unsplash.com/user/john_vicente26", "https://source.unsplash.com/user/timbog80","https://source.unsplash.com/random",
+  "https://source.unsplash.com/user/priscilladupreez", "https://source.unsplash.com/user/chrisjoelcampbell", "https://source.unsplash.com/user/timbog80","https://source.unsplash.com/user/brucemars","https://source.unsplash.com/user/armedshutter"]
 
 
   return (
@@ -94,7 +98,7 @@ export default function Map() {
       
       {selected ? (
       <InfoWindow position={{ lat: selected.lat, lng: selected.lng }} onCloseClick={() => {setSelected(null)}}>
-        <MapCard selected={selected}/>
+        <MapCard selected={selected} img={img}/>
       </InfoWindow>) : null}
       </GoogleMap>
     </div>
