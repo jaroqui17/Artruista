@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import axios from 'axios';
 import { ViewCard } from '../redux/actions/actions.js';
 import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
@@ -39,8 +40,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-
-
 export default function CardsDetail() {
   const classes = useStyles();
   const cards = useSelector(state => state.userCard);
@@ -48,13 +47,22 @@ export default function CardsDetail() {
   const viewCard = () => dispatch(ViewCard());
   const history = useHistory();
 
+
+
+  // when component mounts, using useEffect hook to get data from db
+  useEffect(() => {
+
+  });
+
   const handleView = (e, id) => {
     e.stopPropagation()
     viewCard();
     return history.push(`/view/${id}`);
   };
 
-  
+const img=["https://source.unsplash.com/user/erondu", "https://source.unsplash.com/user/john_vicente26", "https://source.unsplash.com/user/timbog80","https://source.unsplash.com/random",
+"https://source.unsplash.com/user/priscilladupreez", "https://source.unsplash.com/user/chrisjoelcampbell", "https://source.unsplash.com/user/timbog80","https://source.unsplash.com/user/brucemars","https://source.unsplash.com/user/armedshutter"]
+
   return (
     <React.Fragment>
       <CssBaseline />
@@ -66,7 +74,8 @@ export default function CardsDetail() {
                 <Card className={classes.card}>
                   <CardMedia
                     className={classes.cardMedia}
-                    image="https://source.unsplash.com/random"
+                    // image="https://source.unsplash.com/random"
+                    image={img[i]}
                     title="Image title"
                   />
                   <CardContent className={classes.cardContent}>

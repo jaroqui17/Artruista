@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Header from './Header.jsx';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -71,6 +71,40 @@ const useStyles = makeStyles((theme) => ({
 export default function SignUp() {
   const classes = useStyles();
 
+  // initial state with input keys are empty strings
+  const [userSignUp, setUserSignUp] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    password: '',
+  });
+
+  // handling on change for user
+  const handleOnChage = (e) => {
+    const { name, value } = e.target;
+    setUserSignUp({
+      ...userSignUp,
+      [name]: value
+    });
+  };
+
+
+
+  const handleUserSignUp = (e) => {
+    e.preventDefault();
+    // object that contains user input
+    console.log(userSignUp)
+    // axios request would go here
+
+    // resetting input values
+    setUserSignUp({
+      firstName: '',
+      lastName: '',
+      email: '',
+      password: '',
+    });
+  };
+
   return (
     <React.Fragment>
       <Header />
@@ -85,17 +119,19 @@ export default function SignUp() {
         <Typography component="h1" variant="h5">
           Sign up
         </Typography>
-        <form className={classes.form} noValidate>
+        <form className={classes.form} noValidate onSubmit={handleUserSignUp}>
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
               <TextField
                 autoComplete="fname"
                 name="firstName"
+                value={userSignUp.firstName}
                 variant="outlined"
                 required
                 fullWidth
                 id="firstName"
                 label="First Name"
+                onChange={handleOnChage}
                 autoFocus
               />
             </Grid>
@@ -107,7 +143,9 @@ export default function SignUp() {
                 id="lastName"
                 label="Last Name"
                 name="lastName"
+                value={userSignUp.lastName}
                 autoComplete="lname"
+                onChange={handleOnChage}
               />
             </Grid>
             <Grid item xs={12}>
@@ -118,7 +156,9 @@ export default function SignUp() {
                 id="email"
                 label="Email Address"
                 name="email"
+                value={userSignUp.email}
                 autoComplete="email"
+                onChange={handleOnChage}
               />
             </Grid>
             <Grid item xs={12}>
@@ -127,10 +167,12 @@ export default function SignUp() {
                 required
                 fullWidth
                 name="password"
+                value={userSignUp.password}
                 label="Password"
                 type="password"
                 id="password"
                 autoComplete="current-password"
+                onChange={handleOnChage}
               />
             </Grid>
             <Grid item xs={12}>

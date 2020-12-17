@@ -19,7 +19,7 @@ const libraries = ['places'];
 const mapContainerStyle = {
   // width: '100vw',
   width: '100%',
-  height: '100vh',
+  height: '125vh',
 };
 
 // hardcoding where center of map is, need to go back and get this from geolocation
@@ -61,7 +61,7 @@ export default function Map() {
     // pan to that marker
     mapRef.current.panTo({lat, lng});
     // and want map to zoom to hat location
-    mapRef.current.setZoom(8);
+    mapRef.current.setZoom(12);
   }, []);
 
   if (loadError) return 'Error loading maps';
