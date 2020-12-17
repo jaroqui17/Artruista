@@ -23,25 +23,7 @@ app.get('/', (req, res) => {
 	res.sendFile(path.resolve(__dirname, './index.html'));
 });
 
-// app.get('/encryptme', (req, res) => {
-// 	console.log("req.query: ", req.query.password)
-// 	let saltRounds = 10;
-// 	bcrypt.hash(req.query.password, saltRounds, (err, hash) => {
-// 		res.send({
-// 			before: req.query.password,
-// 			after: hash
-// 		})
-// 	})
-// })
-
-// const myHash = hash
-
-// app.get('/compareme', (req, res) => {
-// 	const plainTextPass = req.query.password;
-// 	bcrypt.compare(plainTextPass, myHash, (err, result) => {
-// 		res.send(result) //should be true
-// 	})
-// })
+app.use('/homepage', )
 
 // catch-all route handler for any requests to an unknown route
 app.use((req, res) => res.sendStatus(404));
