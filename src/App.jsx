@@ -7,7 +7,7 @@ import Story from './components/Story.jsx';
 import CardsDetail from './components/CardsDetail.jsx';
 import { HashRouter as Router,Switch,  Route } from 'react-router-dom';
 import MainContainer from './container/MainContainer.jsx'
-
+import OneStory from './components/OneStory.jsx'
 
 
 export default function App() {
@@ -16,11 +16,11 @@ export default function App() {
     <Router>
       <React.Fragment>
           <Switch>   
-           <Route path="/login" exact component={Login} />
+           <Route path="/" exact component={Login} />
            <Route path="/signup" component={SignUp} />
-           <Route exact path="/" component={MainContainer} />
+           <Route exact path="/main" component={MainContainer} />
            <Route path='/story' component={Story} exact/>
-           {/* <Route path='/view' component={OneStory} exact/> */}
+           <Route path='/view/:id' component={OneStory} exact/>
           </Switch>
         </React.Fragment>
     </Router>

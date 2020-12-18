@@ -1,7 +1,6 @@
 const { Pool } = require('pg');
 
-const PG_URL = process.env.URL;
-const bcrypt = require('bcrypt')
+const PG_URL = process.env.PG_URL;
 
 const pool = new Pool({
 	connectionString: PG_URL,
