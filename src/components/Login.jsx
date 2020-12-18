@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
+import axios from 'axios';
 import Header from './Header.jsx';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -11,6 +12,7 @@ import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
+import { NavLink } from 'react-router-dom';
 
 function Copyright() {
   return (
@@ -55,6 +57,40 @@ const useStyles = makeStyles((theme) => ({
 export default function Login() {
   const classes = useStyles();
 
+  // setting up state for user login
+  const [user, setUser] = useState({
+    email: '',
+    password:'',
+  });
+
+
+  // making onchange value new values for email and password
+  const handleOnChange = (e) => {
+    // deconstructing e.target and taking name and value to aid with onchange
+    const { name, value } = e.target;
+    // user input is now value for email and password
+    setUser({
+      ...user,
+      [name]: value,
+    });
+  };
+
+  // handling login submit for user
+  const loginSubmit = (e) => {
+    e.preventDefault();
+    // hold user values
+    console.log(user);
+    axios.post('http://localhost:8080/user/verify', {
+      email: user.email,
+      password: user.password
+    });
+    // where we make our axios call to backend
+
+    // resetting user values
+    setUser({  email: '', password:'',});
+  };
+
+
   return (
     <React.Fragment>
     <Header />
@@ -66,7 +102,7 @@ export default function Login() {
           <Typography component="h1" variant="h5">
             Sign in
           </Typography>
-          <form className={classes.form} noValidate>
+          <form className={classes.form} noValidate onSubmit={loginSubmit}>
             <TextField
               variant="outlined"
               margin="normal"
@@ -75,6 +111,8 @@ export default function Login() {
               id="email"
               label="Email Address"
               name="email"
+              value={user.email}
+              onChange={handleOnChange}
               autoComplete="email"
               autoFocus
             />
@@ -84,6 +122,8 @@ export default function Login() {
               required
               fullWidth
               name="password"
+              value={user.password}
+              onChange={handleOnChange}
               label="Password"
               type="password"
               id="password"
@@ -104,17 +144,17 @@ export default function Login() {
             </Button>
             <Grid container>
               <Grid item xs>
-                <Link href="#" variant="body2">
+                <Link href="/auth/google" variant="body2">
                   Sign in with Google
                 </Link>
               </Grid>
               <Grid item>
-                <Link href="#" variant="body2">
+                <NavLink to="/signup" variant="body2">
                   {"Don't have an account? Sign Up"}
-                </Link>
+                </NavLink>
               </Grid>
             </Grid>
-            <Box mt={30}>
+            <Box mt={25}>
               <Copyright />
             </Box>
           </form>
