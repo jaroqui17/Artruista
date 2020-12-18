@@ -5,6 +5,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
+import axios from 'axios'
 import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
@@ -95,7 +96,12 @@ export default function SignUp() {
     // object that contains user input
     console.log(userSignUp)
     // axios request would go here
-
+    axios.post('http://localhost:8080/user', {
+      firstName: userSignUp.firstName,
+      lastName: userSignUp.lastName,
+      email: userSignUp.email,
+      password: userSignUp.password
+    });
     // resetting input values
     setUserSignUp({
       firstName: '',

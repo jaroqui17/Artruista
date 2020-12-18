@@ -2,6 +2,7 @@ const express = require('express');
 const path = require('path');
 const cors = require('cors');
 require('dotenv').config();
+const cookieParser = require('cookie-parser')
 const storyRouter = require('./routes/router.js');
 const userRouter = require('./routes/userRouter.js');
 const storiesRouter = require('./routes/storyRouter.js');
@@ -12,9 +13,14 @@ const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 
 const app = express();
+const jwt = require('jsonwebtoken')
+app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('build'));
+// const userRouter = require('./routes/userRouter.js')
+// const storyRouter = require('./routes/router.js')
+const bcrypt = require('bcrypt')
 // initializing passport and session
 app.use(passport.initialize());
 app.use(passport.session());
@@ -40,17 +46,30 @@ passport.deserializeUser((id,done) =>{
 })
 
 
-passport.use(new GoogleStrategy({
-    clientID: process.env.GOOGLE_CLIENT_ID,
-	clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-	// once the user clicks on one of the accounts they are redirected to this link
-    callbackURL: "/auth/google/redirect"
-  },
-  (accessToken, refreshToken, profile, done) =>{
-	  console.log('this is profile', profile)
-		// console.log('passport function')
 
-		//save user profile to users table
+// serve main app
+app.get('/', (req, res) => {
+	console.log(req);
+	const jwtToCheck = req.cookies.token || undefined
+	console.log('secret', secret)
+	// const jwtToCheck = req.cookies.token ? //what if this is undefined
+	jwt.verify(jwtToCheck, secret, (err, decoded) => {
+		if (decoded) res.json({authenticated : true})
+		else res.sendFile(path.resolve(__dirname, './index.html'));
+	})
+	// res.sendFile(path.resolve(__dirname, './index.html'));
+});
+
+
+passport.use(new GoogleStrategy({
+	clientID: process.env.GOOGLE_CLIENT_ID,
+clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+// once the user clicks on one of the accounts they are redirected to this link
+	callbackURL: "/auth/google/redirect"
+},
+(accessToken, refreshToken, profile, done) =>{
+	console.log('this is profile', profile)
+	// console.log('passport function')
 		let firstName = profile.name.givenName;
 		let pass = profile.id;
 		console.log('this is username pass', firstName, pass)

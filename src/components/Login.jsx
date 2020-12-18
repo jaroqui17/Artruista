@@ -80,7 +80,7 @@ export default function Login() {
     e.preventDefault();
     // hold user values
     console.log(user);
-    axios.post('http://localhost:8080/user', {
+    axios.post('http://localhost:8080/user/verify', {
       email: user.email,
       password: user.password
     });
